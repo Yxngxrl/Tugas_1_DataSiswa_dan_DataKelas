@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>Tugas Daftar Siswa dan Kelas</title>
+</head>
+<body>
+    <div id="app">
+        <h3>- Masukkan Nama Siswa -</h3>
+        <form v-on:submit.prevent>
+            <input type="text" name="namaSiswa" id="namaSiswa" @keyup.enter="simpanS" v-model="siswa" v-bind:style="style">
+            <button type="button" @click="simpanS">Simpan</button>
+        </form>
+        <br>
+        <table border="1" style="border-collapse:collapse" v-if="dataSiswa.length > 0" v-bind:style="style">
+        <tr>
+            <thead>
+                <th style="width:  30px">#</th>
+                <th style="width: 200px">Nama Siswa</th>
+            </thead>
+        </tr> 
+        <tr>
+            <tbody v-for="(siswa, index) in dataSiswa" :key="index">
+                <td>{{index+1}}</td>
+                <td>{{siswa}}</td>
+            </tbody>
+        </tr>
+        </table>
+        <h4 v-else>Tidak ada data</h4>
+        <br>
+        --------------------------------------------------------------------------------
+        <br>
+        <h3>Masukkan Nama Kelas</h3>
+        <form v-on:submit.prevent>
+            <input type="text" name="namaKelas" id="namaKelas" @keyup.enter="simpanK" v-model="kelas" v-bind:style="style">
+            <button type="button" @click="simpanK">Simpan</button>
+        </form>
+        <br>
+        <table border="1" style="border-collapse:collapse" v-if="dataKelas.length > 0" v-bind:style="style">
+        <tr>
+            <thead>
+                <th style="width:  30px">#</th>
+                <th style="width: 200px">Nama Kelas</th>
+            </thead>
+        </tr> 
+        <tr>
+            <tbody v-for="(kelas, index) in dataKelas" :key="index">
+                <td>{{index+1}}</td>
+                <td>{{kelas}}</td>
+            </tbody>
+        </tr>
+        </table>
+        <h4 v-else>Tidak ada data</h4>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#app",
+            data: {
+                dataSiswa : ['Sinta','Budi',],
+                siswa : '',
+                dataKelas : ['XIRPL1','XIRPL2',],
+                kelas : '',
+                style: {
+                'border': '3px solid black',
+                'background' : 'white',
+                'color' : 'black'
+          },
+            },
+            methods: {
+                simpanS: function(){
+                    this.dataSiswa.push(this.siswa);
+                    this.siswa = "";
+                },
+                simpanK: function(){
+                    this.dataKelas.push(this.kelas);
+                    this.kelas = "";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
